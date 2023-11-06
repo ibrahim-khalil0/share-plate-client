@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+
+
+h1, h2, h3, h4, h5, h6, .playfair-display{
+    font-family: 'Playfair Display', serif;
+}
+
+p, .montserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.primary-color{
+    color: #EC732C;
+}
+
+.secondary-color{
+    color: #41548C;
+}
+
+.primary-bg{
+    background-color: #EC732C;
+}
+
+.secondary-bg{
+    background-color: #41548C;
+}
+
+.active{
+    color: #41548C;
+}
+
+.dropdown:hover .dropdown-items{
+    display: block;
+}
+
+.dropdown-items a {
+    display: block;
+    text-align: left;
+    padding: 5px 15px;
+}
+
+.dropdown-items a:hover{
+    background-color: white;
+}
