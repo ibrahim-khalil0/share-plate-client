@@ -6,7 +6,7 @@ const Header = () => {
 
   const menuItems = <>
           <NavLink to={'/'}>Home</NavLink>
-          <NavLink to={'/availableFood'}>Available Foods</NavLink>
+          <NavLink to={'/foods'}>Foods</NavLink>
           <NavLink to={'/addFood'}>Add Food</NavLink>
           <NavLink to={'/manageFood'}>Manage My Foods</NavLink>
           <NavLink to={'/foodRequest'}>My Food Request</NavLink>

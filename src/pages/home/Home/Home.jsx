@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import FeaturedFood from "../FeaturedFood/FeaturedFood";
 
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <h1 className="bg-red-500 py-[800px]">hello</h1>
+            <FeaturedFood></FeaturedFood>
         </div>
     );
 };

@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -9,6 +8,8 @@ import {
 import "./index.css";
 import Root from './Root/Root.jsx';
 import Home from './pages/home/Home/Home.jsx';
+import AvailableFoods from './pages/AvailbleFoods/AvailableFoods.jsx';
+import Details from './pages/Details/Details.jsx';
 
 
 
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: "/about",
-        element: <div>about</div>
+        path: "/foods",
+        element: <AvailableFoods></AvailableFoods>
+      },
+      {
+        path: "/food/:id",
+        element: <Details></Details>
       }
     ]
   }
