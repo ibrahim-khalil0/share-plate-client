@@ -10,6 +10,7 @@ import Root from './Root/Root.jsx';
 import Home from './pages/home/Home/Home.jsx';
 import AvailableFoods from './pages/AvailbleFoods/AvailableFoods.jsx';
 import Details from './pages/Details/Details.jsx';
+import AddFood from './pages/AddFood/AddFood.jsx';
 
 
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/foods",
         element: <AvailableFoods></AvailableFoods>
+      },
+      {
+        path: "addFood",
+        element: <AddFood></AddFood>
       },
       {
         path: "/food/:id",
