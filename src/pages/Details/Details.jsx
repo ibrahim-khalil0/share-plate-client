@@ -25,14 +25,19 @@ const Details = () => {
 
                 {/* You can open the modal using document.getElementById('ID').showModal() method */}
                
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_3" className="modal bg-[#000000b8]">
                     <div className="modal-box">
                         <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
-                        <h3 className="font-bold text-lg">Hello!</h3>
-                        <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                        <div>
+                            <form className='mt-8 space-y-5'>
+                                <textarea name="" id="" placeholder='Additional Notes' rows="3" className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3'></textarea>
+                                <input type="text" placeholder='Donation Amount'className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3' />
+                                <input type="submit" value="Send Request" name="" id="" className='primary-bg px-5 py-2 rounded-md text-white text-lg montserrat w-full text-center' />
+                            </form>
+                        </div>
                     </div>
                 </dialog>
             </div>
