@@ -1,15 +1,23 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { FaBars } from "react-icons/fa6";
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Header = () => {
+
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleLogOut = () => {
+    logOut()
+  }
 
   const menuItems = <>
           <NavLink to={'/'}>Home</NavLink>
           <NavLink to={'/foods'}>Foods</NavLink>
           <NavLink to={'/addFood'}>Add Food</NavLink>
           <NavLink to={'/manageFood'}>Manage My Foods</NavLink>
-          <NavLink to={'/foodRequest'}>My Food Request</NavLink>
+          <NavLink to={'/myFoodRequest'}>My Food Request</NavLink>
   </>
   return (
     <div className='px-[5%] mx-auto flex items-center py-5 shadow-lg shadow-[#9ca3af29] gap-5'>
@@ -41,7 +49,12 @@ const Header = () => {
 
       {/* login profile section here  */}
       <div className='text-right'>
-        <Link to={'/login'}><button className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Login</button></Link>
+        {
+          user ? <button onClick={handleLogOut} className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Logout</button>
+
+          :
+          <Link to={'/login'}><button className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Login</button></Link>
+        }
       </div>
     </div>
   );
