@@ -1,8 +1,10 @@
 import React from 'react';
+import Helmets from '../../sharedComponents/Helmets/Helmets';
 
 const Details = () => {
     return (
         <div>
+            <Helmets title={'| Details'}></Helmets>
             <div className='px-[5%] grid grid-cols-1 md:grid-cols-2 pt-20'>
                 <div className='bg-[#FAFAFA] rounded-l-md p-10'>
                     <h2 className='capitalize text-4xl'><b>Food Name :</b> This is food name</h2>

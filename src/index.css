@@ -52,3 +52,7 @@ p, .montserrat{
 .food-shadow{
     box-shadow: 5px 0px 10px 0px #80808059;
 }
+
+.profile-container:hover .profile{
+    display: block;
+}

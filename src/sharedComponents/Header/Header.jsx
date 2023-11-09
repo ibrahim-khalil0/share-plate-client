@@ -50,9 +50,18 @@ const Header = () => {
       {/* login profile section here  */}
       <div className='text-right'>
         {
-          user ? <button onClick={handleLogOut} className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Logout</button>
+          user ? <div className='w-[50px] h-[50px] relative profile-container z-30'>
+          <img src={user.photoURL} alt="" className='w-full rounded-full bg-gray-400 h-full' />
+          <div className='bg-gray-100 w-[350px] absolute top-13 rounded-md -right-1 text-left px-5 py-8 space-y-5 profile hidden'>
+            <h2 className='text-xl'>{user.displayName}</h2>
+            <h2 className='text-xl'>{user.email}</h2>
+            <hr className='border-t border-gray-500' />
+            <button onClick={handleLogOut} className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Logout</button>
+          </div>
+        </div>
 
           :
+          
           <Link to={'/login'}><button className='primary-bg text-white px-8 py-2 montserrat rounded-md text-xl tracking-wide'>Login</button></Link>
         }
       </div>

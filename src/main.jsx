@@ -17,6 +17,8 @@ import MyFoodRequest from './pages/MyFoodRequest/MyFoodRequest.jsx';
 import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import AuthProviders from './Providers/AuthProviders.jsx';
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
+import Error from './pages/Error/Error.jsx';
 
 
 
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -36,15 +39,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/addFood",
-        element: <AddFood></AddFood>
+        element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
       },
       {
         path: "/manageFood",
-        element: <ManageFoods></ManageFoods>
+        element: <PrivateRoute><ManageFoods></ManageFoods></PrivateRoute>
       },
       {
         path: "/myFoodRequest",
-        element: <MyFoodRequest></MyFoodRequest>
+        element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
       },
       {
         path: "/login",
@@ -56,11 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/food/:id",
-        element: <Details></Details>
+        element: <PrivateRoute><Details></Details></PrivateRoute>
       },
       {
         path: "/manageRequest/:id",
-        element: <ManageFoodRequest></ManageFoodRequest>
+        element: <PrivateRoute><ManageFoodRequest></ManageFoodRequest></PrivateRoute>
       }
     ]
   }

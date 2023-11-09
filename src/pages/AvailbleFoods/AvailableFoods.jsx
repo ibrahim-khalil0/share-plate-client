@@ -1,9 +1,11 @@
 import React from 'react';
 import Foods from '../../sharedComponents/Foods/Foods';
+import Helmets from '../../sharedComponents/Helmets/Helmets';
 
 const AvailableFoods = () => {
     return (
         <div className='px-[5%] bg-[#FAFAFA]'>
+            <Helmets title={'| Available Foods'}></Helmets>
             <div className='flex justify-center gap-12 items-center pt-10'>
                 <div>
                     <button className='secondary-bg text-white px-5 text-lg py-2 rounded-md montserrat'>Sort By Date</button>

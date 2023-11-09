@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Slide = ({slide}) => {
-    console.log(slide)
     const {title, next, prev, id, img, description} = slide
     return (
         <div id={id} className="carousel-item relative w-full">
