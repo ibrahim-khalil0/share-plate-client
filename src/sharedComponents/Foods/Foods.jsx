@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Foods = ({food}) => {
 
-    const {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, status, donatorImage, donatorEmail, donatorName, additionalNote} = food
+    const {_id, foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, status, donatorImage, donatorEmail, donatorName, additionalNote} = food
     return (
         <div className='bg-white flex gap-8 rounded-md food-shadow'>
             <div className='w-2/6'>
@@ -22,7 +22,7 @@ const Foods = ({food}) => {
                 </div>
                 <div className='flex justify-between flex-wrap'>
                     <h3><b>Available For :</b> {foodQuantity} Person</h3>
-                    <Link to={`/food/1`}><button className='primary-bg text-white rounded px-4 py-1'>View Details</button></Link>
+                    <Link to={`/food/${_id}`}><button className='primary-bg text-white rounded px-4 py-1'>View Details</button></Link>
                 </div>
             </div>
         </div>

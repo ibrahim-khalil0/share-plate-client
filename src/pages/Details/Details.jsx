@@ -1,21 +1,27 @@
 import React from 'react';
 import Helmets from '../../sharedComponents/Helmets/Helmets';
+import { useLoaderData } from 'react-router-dom';
 
 const Details = () => {
+
+    const food = useLoaderData()
+    const {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, donatorName, additionalNote} = food
+
+
     return (
         <div>
             <Helmets title={'| Details'}></Helmets>
-            <div className='px-[5%] grid grid-cols-1 md:grid-cols-2 pt-20'>
+            <div className='px-[5%] grid grid-cols-1 md:grid-cols-2 pt-20 mb-20'>
                 <div className='bg-[#FAFAFA] rounded-l-md p-10'>
-                    <h2 className='capitalize text-4xl'><b>Food Name :</b> This is food name</h2>
-                    <p className='text-base mt-2'>this is additional information for this food. if you want this food please send  a request</p>
+                    <h2 className='capitalize text-4xl'><b>Food Name :</b> {foodName}</h2>
+                    <p className='text-base mt-2'>{additionalNote}</p>
                     <div className='capitalize text-xl my-8'>
-                        <h3 className='flex justify-between'><b className='w-1/3'>Donar Name</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>Md Ibrahim Khalil</span></h3>
-                        <h3 className='flex justify-between'><b className='w-1/3'>Pickup Location</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>Mirpur-1 Dhaka</span></h3>
+                        <h3 className='flex justify-between'><b className='w-1/3'>Donar Name</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>{donatorName}</span></h3>
+                        <h3 className='flex justify-between'><b className='w-1/3'>Pickup Location</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>{pickupLocation}</span></h3>
                     </div>
 
-                    <h3 className='flex justify-between text-xl'><b className='w-1/3'>Available For</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>3 Person</span></h3>
-                    <h3 className='flex justify-between text-xl'><b className='w-1/3'>Expire Date</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>13 july 2023</span></h3>
+                    <h3 className='flex justify-between text-xl'><b className='w-1/3'>Available For</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>{foodQuantity} Person</span></h3>
+                    <h3 className='flex justify-between text-xl'><b className='w-1/3'>Expire Date</b> <b className='w-[20px]'>:</b> <span className='flex-1 ml-4'>{expiredDateTime}</span></h3>
                     <div>
                         <button onClick={()=>document.getElementById('my_modal_3').showModal()} className='secondary-bg px-5 py-3 text-lg text-white montserrat rounded-md mt-10'>Send Request For a Food</button>
                     </div>
