@@ -1,11 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Helmets from '../../sharedComponents/Helmets/Helmets';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Details = () => {
 
+    const {user} = useContext(AuthContext)
+    console.log(user)
+
     const food = useLoaderData()
     const {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, donatorName, additionalNote} = food
+    console.log(food)
+
+    delete food._id
+    const handleRequest = e => {
+        e.preventDefault()
+        const form = e.target
+        const requestNotes = form.requestNotes.value
+        const donationAmount = form.donationAmount.value
+        food.donationAmount = donationAmount
+        food.requestNotes = requestNotes
+        food.requesterEmail = user.email
+
+        const date = new Date();
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+
+        const requestDate = `${day}-${month}-${year}`;
+
+        food.requestDate = requestDate
+        console.log(food)
+
+        fetch('http://localhost:5000/request', {
+            method: 'POST',
+            headers: {
+                "content-type":"application/json",
+            },
+            body: JSON.stringify(food)
+
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            alert('food added')
+        })
+    }
 
 
     return (
@@ -30,8 +70,6 @@ const Details = () => {
                     <img src="https://img.freepik.com/free-photo/community-actions-with-food-donations_23-2149196162.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=ais" alt="" className='w-full h-full rounded-r-md' />
                 </div>
 
-
-                {/* You can open the modal using document.getElementById('ID').showModal() method */}
                
                 <dialog id="my_modal_3" className="modal bg-[#000000b8]">
                     <div className="modal-box">
@@ -40,9 +78,9 @@ const Details = () => {
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
                         <div>
-                            <form className='mt-8 space-y-5'>
-                                <textarea name="" id="" placeholder='Additional Notes' rows="3" className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3'></textarea>
-                                <input type="text" placeholder='Donation Amount'className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3' />
+                            <form onSubmit={handleRequest} className='mt-8 space-y-5'>
+                                <textarea name="requestNotes" id="" placeholder='Additional Notes' rows="3" className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3'></textarea>
+                                <input type="number" name='donationAmount' placeholder='Donation Amount'className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3' />
                                 <input type="submit" value="Send Request" name="" id="" className='primary-bg px-5 py-2 rounded-md text-white text-lg montserrat w-full text-center' />
                             </form>
                         </div>

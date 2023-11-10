@@ -67,6 +67,7 @@ const router = createBrowserRouter([
       {
         path: "/manageRequest/:id",
         element: <PrivateRoute><ManageFoodRequest></ManageFoodRequest></PrivateRoute>
+        // loader: ({params}) => fetch(``)
       }
     ]
   }

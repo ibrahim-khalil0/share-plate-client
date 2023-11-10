@@ -61,7 +61,7 @@ export default function CustomizedTables({foods}) {
                                 <div className='flex justify-end gap-3'>
                                     <button onClick={()=>document.getElementById('my_modal_3').showModal()} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
                                     <button className='secondary-bg p-2 rounded-md text-white text-base'><AiOutlineDelete></AiOutlineDelete></button>
-                                    <button><Link to={'/manageRequest/1'}><button className='primary-bg p-2 rounded-md text-white text-base'><MdManageHistory></MdManageHistory></button></Link></button>
+                                    <button><Link to={`/manageRequest/${food._id}`}><button className='primary-bg p-2 rounded-md text-white text-base'><MdManageHistory></MdManageHistory></button></Link></button>
                                 </div>
                             </StyledTableCell>
                         </StyledTableRow>)

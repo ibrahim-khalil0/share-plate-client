@@ -5,7 +5,8 @@ import { AuthContext } from '../../Providers/AuthProviders';
 const AddFood = () => {
 
     const {user} = useContext(AuthContext)
-    const {displayName, email, photo} = user
+    const {displayName, email, photoURL} = user
+    console.log(user)
 
     const handleAddFood = e => {
         e.preventDefault()
@@ -64,7 +65,7 @@ const AddFood = () => {
 
                         
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" value={photo} readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" value={photoURL} readOnly/>
 
                         <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="donatorName" name="donatorName" value={displayName} readOnly/>
 
