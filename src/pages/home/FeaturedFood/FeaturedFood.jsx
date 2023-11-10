@@ -2,16 +2,13 @@ import React from 'react';
 import Foods from '../../../sharedComponents/Foods/Foods';
 import { Link } from 'react-router-dom';
 
-const FeaturedFood = () => {
+const FeaturedFood = ({foods}) => {
     return (
         <div className='bg-[#FAFAFA] px-[5%] py-24'>
             <h1 className='text-center text-5xl font-semibold'>Featured Food</h1>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 mt-14'>
                 {
-                    <Foods></Foods>
-                }
-                {
-                    <Foods></Foods>
+                    foods.map(food => <Foods key={food._id} food={food}></Foods>)
                 }
 
             </div>
