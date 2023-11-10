@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Helmets from '../../sharedComponents/Helmets/Helmets';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const AddFood = () => {
+
+    const {user} = useContext(AuthContext)
+    const {displayName, email, photo} = user
 
     const handleAddFood = e => {
         e.preventDefault()
@@ -60,11 +64,11 @@ const AddFood = () => {
 
                         
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" value="https://lh3.googleusercontent.com/a/ACg8ocLLbYPSbIMUzYsOadEjJCr-omYLchWxWdKoEIKNLLKpbSo=s96-c" readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" value={photo} readOnly/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="donatorName" name="donatorName" value="John Doe" readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="donatorName" name="donatorName" value={displayName} readOnly/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="email" id="donatorEmail" name="donatorEmail" value="john@example.com" readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="email" id="donatorEmail" name="donatorEmail" value={email} readOnly/>
 
                         <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="hidden" id="foodStatus" name="foodStatus" value="available"/>
 
@@ -73,7 +77,7 @@ const AddFood = () => {
                     <br />
                     <div>
                         <textarea className='w-full rounded-md text-lg px-2 py-3' id="additionalNotes" name="additionalNote" placeholder="Additional Notes"></textarea>
-                        <input type="submit" value="Add Food" className='secondary-bg text-white text-lg px-8 py-2 rounded-md mt-3' />
+                        <input type="submit" value="Add Food" className='secondary-bg text-white text-lg px-8 py-2 rounded-md mt-3 cursor-pointer' />
                     </div>
                 </form>
             </div>

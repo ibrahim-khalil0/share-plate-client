@@ -32,9 +32,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const arr = [1, 2, 3, 4, 5]
 
-export default function CustomizedTables() {
+export default function CustomizedTables({foods}) {
+
   return (
     <div>
         <TableContainer component={Paper}>
@@ -42,21 +42,21 @@ export default function CustomizedTables() {
                 <TableHead>
                 <TableRow>
                     <StyledTableCell>Food Name</StyledTableCell>
-                    <StyledTableCell align="right">Image</StyledTableCell>
-                    <StyledTableCell align="right">Quantity</StyledTableCell>
-                    <StyledTableCell align="right">Expire Date</StyledTableCell>
+                    <StyledTableCell align="center">Image</StyledTableCell>
+                    <StyledTableCell align="center">Quantity</StyledTableCell>
+                    <StyledTableCell align="center">Expire Date</StyledTableCell>
                     <StyledTableCell align="right">Manage</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        arr.map(item => <StyledTableRow>
+                        foods.map(food => <StyledTableRow>
                             <StyledTableCell component="th" scope="row">
-                            name
+                            {food.foodName}
                             </StyledTableCell>
-                            <StyledTableCell align="right">b</StyledTableCell>
-                            <StyledTableCell align="right">c</StyledTableCell>
-                            <StyledTableCell align="right">d</StyledTableCell>
+                            <StyledTableCell align="center"><img src={food.foodImage} alt="" className='w-14 h-14 rounded-md inline' /></StyledTableCell>
+                            <StyledTableCell align="center">{food.foodQuantity}</StyledTableCell>
+                            <StyledTableCell align="center">{food.expiredDateTime}</StyledTableCell>
                             <StyledTableCell align="right">
                                 <div className='flex justify-end gap-3'>
                                     <button onClick={()=>document.getElementById('my_modal_3').showModal()} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
