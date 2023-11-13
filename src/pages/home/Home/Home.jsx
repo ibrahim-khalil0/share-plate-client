@@ -12,7 +12,6 @@ const Home = () => {
     if(sortedFoods.length > 3){
         foods = sortedFoods.slice(0, 6)
     }
-    // console.log(sortedFoods)
 
     return (
         <div>

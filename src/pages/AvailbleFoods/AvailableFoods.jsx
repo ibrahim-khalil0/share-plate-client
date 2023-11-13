@@ -6,7 +6,6 @@ import Helmets from '../../sharedComponents/Helmets/Helmets';
 const AvailableFoods = () => {
 
     const foods = useLoaderData()
-    console.log(foods)
 
     return (
         <div className='px-[5%] bg-[#FAFAFA]'>
@@ -24,8 +23,6 @@ const AvailableFoods = () => {
                 {
                     foods.map(food => <Foods key={food._id} food={food}></Foods>)
                 }
-                {/* <Foods></Foods>
-                <Foods></Foods> */}
             </div>
         </div>
     );

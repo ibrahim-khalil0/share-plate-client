@@ -6,13 +6,10 @@ import { AuthContext } from '../../Providers/AuthProviders';
 const Details = () => {
 
     const {user} = useContext(AuthContext)
-    console.log(user)
 
     const food = useLoaderData()
     const {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, donatorName, additionalNote} = food
-    console.log(food)
 
-    delete food._id
     const handleRequest = e => {
         e.preventDefault()
         const form = e.target
@@ -21,6 +18,10 @@ const Details = () => {
         food.donationAmount = donationAmount
         food.requestNotes = requestNotes
         food.requesterEmail = user.email
+        food.requestId = food._id + 1
+        food.requesterName = user.displayName
+        food.requesterImage = user.photoURL
+        delete food._id
 
         const date = new Date();
         const day = date.getDate();
@@ -81,7 +82,7 @@ const Details = () => {
                             <form onSubmit={handleRequest} className='mt-8 space-y-5'>
                                 <textarea name="requestNotes" id="" placeholder='Additional Notes' rows="3" className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3'></textarea>
                                 <input type="number" name='donationAmount' placeholder='Donation Amount'className='w-full border border-gray-300 outline-0 rounded-md px-5 py-3' />
-                                <input type="submit" value="Send Request" name="" id="" className='primary-bg px-5 py-2 rounded-md text-white text-lg montserrat w-full text-center' />
+                                <input type="submit" value="Send Request" name="" id="" className='primary-bg cursor-pointer px-5 py-2 rounded-md text-white text-lg montserrat w-full text-center' />
                             </form>
                         </div>
                     </div>

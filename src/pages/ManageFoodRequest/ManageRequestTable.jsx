@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const arr = [1, 2, 3, 4, 5]
 
 
-export default function ManageRequestTable() {
+export default function ManageRequestTable({foods}) {
   return (
     <div>
         <TableContainer component={Paper}>
@@ -43,24 +43,26 @@ export default function ManageRequestTable() {
                     <StyledTableCell align='center'>Requester Name</StyledTableCell>
                     <StyledTableCell align="center">Requester Image</StyledTableCell>
                     <StyledTableCell align="center">Requester Email</StyledTableCell>
-                    <StyledTableCell align="center">Request Time and Date</StyledTableCell>
+                    <StyledTableCell align="center">Request Date <br /> D - M - Y</StyledTableCell>
                     <StyledTableCell align="right">Status</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        arr.map(item => <StyledTableRow>
-                            <StyledTableCell>{item}</StyledTableCell>
+                        foods.map((food, idx) => <StyledTableRow key={idx}>
+                            <StyledTableCell>{idx + 1}</StyledTableCell>
                             <StyledTableCell component="th" scope="row" align='center'>
-                            namekkkkkkkkkkkkkkkkkkjjjjjjjjjjjj
+                            {food.requesterName}
                             </StyledTableCell>
-                            <StyledTableCell align="center">b</StyledTableCell>
-                            <StyledTableCell align="center">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</StyledTableCell>
-                            <StyledTableCell align="center">d</StyledTableCell>
+                            <StyledTableCell align="center">
+                              <img src={food.requesterImage} alt="" className='w-14 h-14 rounded-md' />
+                            </StyledTableCell>
+                            <StyledTableCell align="center">{food.requesterEmail}</StyledTableCell>
+                            <StyledTableCell align="center">{food.requestDate}</StyledTableCell>
                             <StyledTableCell align="right">
                                 <form>
                                     <select name="" id="" className='bg-[#00000000]'>
-                                        <option value="Pending">Pending</option>
+                                        <option value="Pending">{food.manageStatus ? food.manageStatus : 'Pending'}</option>
                                         <option value="Delivered">Delivered</option>
                                         <option value="Delivered">Canceled</option>
                                     </select>
