@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -40,6 +40,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables({foods}) {
 
   const {user} = useContext(AuthContext)
+  const [allFoods, setAllFoods] = useState([])
+  console.log(allFoods)
+
+  useEffect( () => {
+    setAllFoods(foods)
+  }, [foods])
 
 
 let foodId
@@ -81,6 +87,20 @@ const handleFoodUpdate = e => {
         })
 }
 
+
+const handleDelete = (id) => {
+
+    fetch(`http://localhost:5000/delete/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        confirm('are you sure')
+        const remainingFoods = foods.filter(food => food._id !== id)
+        setAllFoods(remainingFoods)
+    })
+}
+
   return (
     <div>
         <TableContainer component={Paper}>
@@ -96,7 +116,7 @@ const handleFoodUpdate = e => {
                 </TableHead>
                 <TableBody>
                     {
-                        foods.map(food => <StyledTableRow>
+                        allFoods.map(food => <StyledTableRow>
                             <StyledTableCell component="th" scope="row">
                             {food.foodName}
                             </StyledTableCell>
@@ -106,7 +126,7 @@ const handleFoodUpdate = e => {
                             <StyledTableCell align="right">
                                 <div className='flex justify-end gap-3'>
                                     <button onClick={() => handlePopup(food._id, food)} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
-                                    <button className='secondary-bg p-2 rounded-md text-white text-base'><AiOutlineDelete></AiOutlineDelete></button>
+                                    <button onClick={() => handleDelete(food._id)} className='secondary-bg p-2 rounded-md text-white text-base'><AiOutlineDelete></AiOutlineDelete></button>
                                     <button><Link to={`/manageRequest/${food._id}`}><button className='primary-bg p-2 rounded-md text-white text-base'><MdManageHistory></MdManageHistory></button></Link></button>
                                 </div>
                             </StyledTableCell>
@@ -126,20 +146,20 @@ const handleFoodUpdate = e => {
                 <form onSubmit={handleFoodUpdate} className='backdrop-blur-sm bg-white/30 backdrop-brightness-50 p-5 md:p-8 mt-5 lg:p-20 rounded-md'>
                     <h1 className='text-center text-5xl bg-white mb-10 rounded-md py-3'>Update Food</h1>
                     <div className='grid md:grid-cols-2 gap-8'>
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="foodName" name="foodName" placeholder="Food Name" value={foodUpdate?.foodName} required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="foodName" name="foodName" placeholder="Food Name" defaultValue={foodUpdate?.foodName} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="foodImage" name="foodImage" placeholder="Food Image (URL)" value={foodUpdate?.foodImage} required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="foodImage" name="foodImage" placeholder="Food Image (URL)" defaultValue={foodUpdate?.foodImage} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="number" id="foodQuantity" name="foodQuantity" placeholder="Food Quantity" value={foodUpdate?.foodQuantity} required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="number" id="foodQuantity" name="foodQuantity" placeholder="Food Quantity" defaultValue={foodUpdate?.foodQuantity} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="pickupLocation" name="pickupLocation" placeholder="Pickup Location" value={foodUpdate?.pickupLocation} required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="pickupLocation" name="pickupLocation" placeholder="Pickup Location" defaultValue={foodUpdate?.pickupLocation} required/>
 
                         <select name="status" id="" className='rounded-md text-lg px-2 py-3 col-span-2'>
                             <option>Available</option>
                             <option>Not Available</option>
                         </select>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="date" id="expiredDateTime" name="expiredDateTime" placeholder="Expired Date/Time" value={foodUpdate?.expiredDateTime} required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="date" id="expiredDateTime" name="expiredDateTime" placeholder="Expired Date/Time" defaultValue={foodUpdate?.expiredDateTime} required/>
 
                         
 
