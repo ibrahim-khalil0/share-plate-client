@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +12,7 @@ import { FaRegPenToSquare } from "react-icons/fa6";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdManageHistory } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,7 +35,51 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
+
+
 export default function CustomizedTables({foods}) {
+
+  const {user} = useContext(AuthContext)
+
+
+let foodId
+const [foodUpdate, setFoodUpdate] = useState({})
+
+const handlePopup = (id, food) => {
+  document.getElementById('my_modal_3').showModal()
+  foodId = id
+  setFoodUpdate(food)
+}
+
+const handleFoodUpdate = e => {
+
+    e.preventDefault()
+    const form = e.target
+
+    const foodName = form.foodName.value
+    const foodImage = form.foodImage.value
+    const foodQuantity = form.foodQuantity.value
+    const pickupLocation = form.pickupLocation.value
+    const expiredDateTime = form.expiredDateTime.value
+    const status = form.status.value
+    const additionalNote = form.additionalNotes.value
+
+    const updateFood = {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, status, additionalNote}
+    console.log(foodId)
+
+    fetch(`http://localhost:5000/updateFood/${foodId}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(updateFood)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          alert("Product Updated Successfully")
+        })
+}
 
   return (
     <div>
@@ -59,7 +105,7 @@ export default function CustomizedTables({foods}) {
                             <StyledTableCell align="center">{food.expiredDateTime}</StyledTableCell>
                             <StyledTableCell align="right">
                                 <div className='flex justify-end gap-3'>
-                                    <button onClick={()=>document.getElementById('my_modal_3').showModal()} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
+                                    <button onClick={() => handlePopup(food._id, food)} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
                                     <button className='secondary-bg p-2 rounded-md text-white text-base'><AiOutlineDelete></AiOutlineDelete></button>
                                     <button><Link to={`/manageRequest/${food._id}`}><button className='primary-bg p-2 rounded-md text-white text-base'><MdManageHistory></MdManageHistory></button></Link></button>
                                 </div>
@@ -77,31 +123,31 @@ export default function CustomizedTables({foods}) {
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
                 <div>
-                <form className='backdrop-blur-sm bg-white/30 backdrop-brightness-50 p-5 md:p-8 mt-5 lg:p-20 rounded-md'>
+                <form onSubmit={handleFoodUpdate} className='backdrop-blur-sm bg-white/30 backdrop-brightness-50 p-5 md:p-8 mt-5 lg:p-20 rounded-md'>
                     <h1 className='text-center text-5xl bg-white mb-10 rounded-md py-3'>Update Food</h1>
                     <div className='grid md:grid-cols-2 gap-8'>
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="foodName" name="foodName" placeholder="Food Name" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="foodName" name="foodName" placeholder="Food Name" value={foodUpdate?.foodName} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="foodImage" name="foodImage" placeholder="Food Image (URL)" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="foodImage" name="foodImage" placeholder="Food Image (URL)" value={foodUpdate?.foodImage} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="number" id="foodQuantity" name="foodQuantity" placeholder="Food Quantity" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="number" id="foodQuantity" name="foodQuantity" placeholder="Food Quantity" value={foodUpdate?.foodQuantity} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="pickupLocation" name="pickupLocation" placeholder="Pickup Location" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="pickupLocation" name="pickupLocation" placeholder="Pickup Location" value={foodUpdate?.pickupLocation} required/>
 
-                        <select name="" id="" className='rounded-md text-lg px-2 py-3 col-span-2'>
+                        <select name="status" id="" className='rounded-md text-lg px-2 py-3 col-span-2'>
                             <option>Available</option>
                             <option>Not Available</option>
                         </select>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="datetime-local" id="expiredDateTime" name="expiredDateTime" placeholder="Expired Date/Time" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="date" id="expiredDateTime" name="expiredDateTime" placeholder="Expired Date/Time" value={foodUpdate?.expiredDateTime} required/>
 
                         
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" required/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="url" id="donatorImage" name="donatorImage" placeholder="Donator Image (URL)" value={user.photoURL} required/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="donatorName" name="donatorName" value="John Doe" readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="text" id="donatorName" name="donatorName" value={user.displayName} readOnly/>
 
-                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="email" id="donatorEmail" name="donatorEmail" value="john@example.com" readOnly/>
+                        <input className='rounded-md text-lg px-2 py-3 col-span-2 md:col-span-1' type="email" id="donatorEmail" name="donatorEmail" value={user.email} readOnly/>
 
                         <input className='rounded-md text-lg px-2 py-3' type="hidden" id="foodStatus" name="foodStatus" value="available"/>
 
@@ -109,8 +155,8 @@ export default function CustomizedTables({foods}) {
                     </div>
                     <br />
                     <div>
-                        <textarea className='w-full rounded-md text-lg px-2 py-3' id="additionalNotes" name="additionalNotes" placeholder="Additional Notes"></textarea>
-                        <input type="submit" value="Add Food" className='secondary-bg text-white text-lg px-8 py-2 rounded-md mt-3' />
+                        <textarea className='w-full rounded-md text-lg px-2 py-3' id="additionalNotes" name="additionalNotes" placeholder="Additional Notes" value={foodUpdate?.additionalNote}></textarea>
+                        <input type="submit" value="Update Food" className='secondary-bg text-white text-lg px-8 py-2 rounded-md mt-3' />
                     </div>
                 </form>
                 </div>
