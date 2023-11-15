@@ -17,7 +17,7 @@ const ManageFoodRequest = () => {
         <div className="bg-[#FAFAFA] px-[5%] min-h-screen">
             <Helmets title={'| Manage Food Request'}></Helmets>
             <div>
-                <h1 className="text-4xl py-20">All Request For : {foods[1]?.foodName}</h1>
+                <h1 className="text-4xl py-20">All Request For : {foods[0]?.foodName}</h1>
                 <ManageRequestTable foods={foods}></ManageRequestTable>
                 
             </div>

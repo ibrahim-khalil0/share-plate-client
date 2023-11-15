@@ -1,7 +1,20 @@
 import React from 'react';
 
-const RequestedFood = ({food}) => {
+const RequestedFood = ({food, foods, setFoods}) => {
     const {foodImage, pickupLocation, expiredDateTime, status, donatorName, requestDate, donationAmount} = food
+
+    const handleDelete = (id) => {
+
+        fetch(`http://localhost:5000/cancel/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            confirm('are you sure')
+            const remainingFoods = foods.filter(food => food._id !== id)
+            setFoods(remainingFoods)
+        })
+    }
 
     return (
         <div className='bg-white rounded-md shadow-lg shadow-gray-300'>
@@ -26,7 +39,7 @@ const RequestedFood = ({food}) => {
                 </div>
             </div>
             <div className='text-center py-8'>
-                <button className='border border-gray-400 px-8 py-3 rounded-md font-bold text-lg'>Cancel Request</button>
+                <button onClick={() => handleDelete(food._id)} className='border border-gray-400 px-8 py-3 rounded-md font-bold text-lg'>Cancel Request</button>
             </div>
         </div>
     );

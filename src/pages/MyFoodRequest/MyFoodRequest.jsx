@@ -18,7 +18,7 @@ const MyFoodRequest = () => {
             <Helmets title={'| My Food Requests'}></Helmets>
             <div className='grid grid-cols-1 md:grid-cols-2 py-20 gap-10'>
                 {
-                    foods.map(food => <RequestedFood key={food._id} food={food}></RequestedFood>)
+                    foods.map(food => <RequestedFood key={food._id} food={food} foods={foods} setFoods={setFoods}></RequestedFood>)
                 }
 
             </div>

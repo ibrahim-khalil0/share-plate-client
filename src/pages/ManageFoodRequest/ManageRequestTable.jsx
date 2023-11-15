@@ -39,6 +39,7 @@ export default function ManageRequestTable({foods}) {
       const manageStatus = statusField.value
 
       const updateStatus = {manageStatus}
+      console.log(updateStatus)
 
       fetch(`http://localhost:5000/updateStatus/${id}`, {
           method: 'PUT',
@@ -50,6 +51,7 @@ export default function ManageRequestTable({foods}) {
         .then(res => res.json())
         .then(data => {
           alert("Product Updated Successfully")
+
         })
     }
 
@@ -85,7 +87,6 @@ export default function ManageRequestTable({foods}) {
                                     <select name="" id="status" className='bg-[#00000000]'>
                                         <option value="Pending">{food.manageStatus ? food.manageStatus : 'Pending'}</option>
                                         <option value="Delivered">Delivered</option>
-                                        <option value="Delivered">Canceled</option>
                                     </select>
                                     <input onClick={() => handleUpdateStatus(food._id)} className='primary-bg text-[10px] cursor-pointer text-white rounded-full p-1' type="submit" name="" value="OK" id="" />
                                 </div>
