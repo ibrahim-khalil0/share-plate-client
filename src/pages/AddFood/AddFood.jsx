@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Helmets from '../../sharedComponents/Helmets/Helmets';
 import { AuthContext } from '../../Providers/AuthProviders';
+import swal from 'sweetalert';
 
 const AddFood = () => {
 
@@ -38,7 +39,8 @@ const AddFood = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            alert('food added')
+            swal("Good job!", "You Added a Food Successfully", "success");
+            form.reset()
         })
     }
     return (

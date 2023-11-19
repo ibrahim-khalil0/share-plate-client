@@ -13,6 +13,9 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { MdManageHistory } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import swal from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,23 +40,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function CustomizedTables({foods}) {
+export default function CustomizedTables({foods, setUpdateDependency}) {
 
   const {user} = useContext(AuthContext)
   const [allFoods, setAllFoods] = useState([])
-  console.log(allFoods)
 
   useEffect( () => {
     setAllFoods(foods)
   }, [foods])
 
 
-let foodId
+const [foodId, setFoodId] = useState(null)
 const [foodUpdate, setFoodUpdate] = useState({})
 
-const handlePopup = (id, food) => {
+
+const handlePopup = (id) => {
   document.getElementById('my_modal_3').showModal()
-  foodId = id
+  setFoodId(id)
+  const food = foods.find(food => food._id == id)
   setFoodUpdate(food)
 }
 
@@ -61,6 +65,7 @@ const handleFoodUpdate = e => {
 
     e.preventDefault()
     const form = e.target
+    console.log(foodId)
 
     const foodName = form.foodName.value
     const foodImage = form.foodImage.value
@@ -82,23 +87,40 @@ const handleFoodUpdate = e => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
-          alert("Product Updated Successfully")
+          toast("The Food Update Successfully");
+          setUpdateDependency(foodName)
         })
+
 }
 
 
 const handleDelete = (id) => {
 
-    fetch(`http://localhost:5000/delete/${id}`, {
+  // const test = confirm('If you click "OK" this food will be remove permanently')
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this food!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      fetch(`http://localhost:5000/delete/${id}`, {
         method: 'DELETE'
     })
     .then(res => res.json())
     .then(data => {
-        confirm('are you sure')
         const remainingFoods = foods.filter(food => food._id !== id)
         setAllFoods(remainingFoods)
+        swal("Your Food has been deleted!", {
+          icon: "success",
+        });
     })
+
+      
+    }
+  });
 }
 
   return (
@@ -125,7 +147,7 @@ const handleDelete = (id) => {
                             <StyledTableCell align="center">{food.expiredDateTime}</StyledTableCell>
                             <StyledTableCell align="right">
                                 <div className='flex justify-end gap-3'>
-                                    <button onClick={() => handlePopup(food._id, food)} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
+                                    <button onClick={() => handlePopup(food._id)} className='primary-bg p-2 rounded-md text-white text-base'><FaRegPenToSquare></FaRegPenToSquare></button>
                                     <button onClick={() => handleDelete(food._id)} className='secondary-bg p-2 rounded-md text-white text-base'><AiOutlineDelete></AiOutlineDelete></button>
                                     <button><Link to={`/manageRequest/${food._id}`}><button className='primary-bg p-2 rounded-md text-white text-base'><MdManageHistory></MdManageHistory></button></Link></button>
                                 </div>
@@ -176,12 +198,13 @@ const handleDelete = (id) => {
                     <br />
                     <div>
                         <textarea className='w-full rounded-md text-lg px-2 py-3' id="additionalNotes" name="additionalNotes" placeholder="Additional Notes" value={foodUpdate?.additionalNote}></textarea>
-                        <input type="submit" value="Update Food" className='secondary-bg text-white text-lg px-8 py-2 rounded-md mt-3' />
+                        <input type="submit" value="Update Food" className='secondary-bg cursor-pointer text-white text-lg px-8 py-2 rounded-md mt-3' />
                     </div>
                 </form>
                 </div>
             </div>
         </dialog>
+        <ToastContainer></ToastContainer>
     </div>
 
   );

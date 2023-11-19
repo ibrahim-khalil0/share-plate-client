@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Helmets from '../../sharedComponents/Helmets/Helmets';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Details = () => {
 
@@ -33,7 +34,7 @@ const Details = () => {
         food.requestDate = requestDate
         console.log(food)
 
-        fetch('http://localhost:5000/request', {
+        fetch(`http://localhost:5000/request`, {
             method: 'POST',
             headers: {
                 "content-type":"application/json",
@@ -43,8 +44,8 @@ const Details = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            alert('food added')
+            toast('You Successfully Send a Request For This Food')
+            form.reset()
         })
     }
 
@@ -68,7 +69,7 @@ const Details = () => {
                     </div>
                 </div>
                 <div>
-                    <img src="https://img.freepik.com/free-photo/community-actions-with-food-donations_23-2149196162.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=ais" alt="" className='w-full h-full rounded-r-md' />
+                    <img src={foodImage} alt="" className='w-full rounded-r-md' />
                 </div>
 
                
@@ -88,6 +89,7 @@ const Details = () => {
                     </div>
                 </dialog>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

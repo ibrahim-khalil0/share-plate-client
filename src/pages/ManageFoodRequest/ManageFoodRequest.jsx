@@ -14,13 +14,17 @@ const ManageFoodRequest = () => {
     }, [])
 
     return (
-        <div className="bg-[#FAFAFA] px-[5%] min-h-screen">
+        <div className="bg-[#FAFAFA] px-[5%]">
             <Helmets title={'| Manage Food Request'}></Helmets>
-            <div>
-                <h1 className="text-4xl py-20">All Request For : {foods[0]?.foodName}</h1>
-                <ManageRequestTable foods={foods}></ManageRequestTable>
-                
-            </div>
+            {
+                foods.length ? 
+                <div className="pb-10">
+                    <h1 className="text-4xl py-20">All Request For : {foods[0]?.foodName}</h1>
+                    <ManageRequestTable foods={foods}></ManageRequestTable>
+                </div>
+                :
+                <div className="text-center py-32 text-5xl"><h1>There have not any request</h1></div>
+            }
         </div>
     );
 };

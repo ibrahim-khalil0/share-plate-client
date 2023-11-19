@@ -14,7 +14,7 @@ const Slide = ({slide}) => {
               <div className='lg:w-1/2 w-2/3 space-y-6'>
                 <h1 className='text-5xl md:text-7xl font-semibold tracking-wide'>{title}</h1>
                 <p className='text-lg tracking-wide'>{description}</p>
-                <Link to={'/'}><button className='secondary-bg px-8 py-3 rounded-md text-2xl mt-8 montserrat'>Donate Food</button></Link>
+                <Link to={'/addFood'}><button className='secondary-bg px-8 py-3 rounded-md text-2xl mt-8 montserrat'>Donate Food</button></Link>
               </div>
             </div>
           </div>

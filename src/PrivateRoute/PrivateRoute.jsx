@@ -6,7 +6,7 @@ const PrivateRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext)
     const location = useLocation()
     if(loading){
-        return <h3 className="text-center h-[300px] pt-28">Loading...</h3>
+        return <span className="loading loading-spinner text-error"></span>
     }
     if(user){
         return children

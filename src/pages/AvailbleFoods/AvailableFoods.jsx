@@ -10,7 +10,9 @@ const AvailableFoods = () => {
     return (
         <div className='px-[5%] bg-[#FAFAFA]'>
             <Helmets title={'| Available Foods'}></Helmets>
-            <div className='flex justify-center gap-12 items-center pt-10'>
+            {
+                foods.length ? <div>
+                    <div className='flex justify-center gap-12 items-center pt-10'>
                 <div>
                     <button className='secondary-bg text-white px-5 text-lg py-2 rounded-md montserrat'>Sort By Date</button>
                 </div>
@@ -24,6 +26,10 @@ const AvailableFoods = () => {
                     foods.map(food => <Foods key={food._id} food={food}></Foods>)
                 }
             </div>
+                </div>
+                :
+                <span className="loading loading-spinner text-error mx-auto block h-[500px]"></span>
+            }
         </div>
     );
 };

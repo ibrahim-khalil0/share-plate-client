@@ -7,7 +7,7 @@ const Foods = ({food}) => {
     return (
         <div className='bg-white flex gap-8 rounded-md food-shadow'>
             <div className='w-2/6'>
-                <img src="https://img.freepik.com/free-photo/community-actions-with-food-donations_23-2149196162.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=ais" alt="" className='w-full h-full rounded-l-md' />
+                <img src={foodImage} alt="" className='w-full h-full rounded-l-md' />
             </div>
             <div className='py-4 pr-3 flex-1'>
                 <h1 className='text-3xl font-semibold'>{foodName}</h1>

@@ -1,19 +1,33 @@
 import React from 'react';
+import swal from 'sweetalert';
 
 const RequestedFood = ({food, foods, setFoods}) => {
     const {foodImage, pickupLocation, expiredDateTime, status, donatorName, requestDate, donationAmount} = food
 
     const handleDelete = (id) => {
 
-        fetch(`http://localhost:5000/cancel/${id}`, {
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(data => {
-            confirm('are you sure')
-            const remainingFoods = foods.filter(food => food._id !== id)
-            setFoods(remainingFoods)
-        })
+        swal({
+            title: "Are you sure?",
+            text: "Do You Want To Cancel The Food Request?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                fetch(`http://localhost:5000/cancel/${id}`, {
+                method: 'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    swal('Request Canceled Successfully')
+                    const remainingFoods = foods.filter(food => food._id !== id)
+                    setFoods(remainingFoods)
+                })
+            }
+          });
+
+        
     }
 
     return (
@@ -23,11 +37,11 @@ const RequestedFood = ({food, foods, setFoods}) => {
             </div>
             <div className='xl:flex justify-between pt-8 px-8 text-lg gap-2'>
                 <div className='space-y-5'>
-                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Donar</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-right xl:text-lef primary-color'>{donatorName}</span></h3>
+                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Donar</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-right xl:text-left primary-color'>{donatorName}</span></h3>
 
-                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Location</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-right xl:text-lef primary-color'>{pickupLocation}</span></h3>
+                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Location</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-sm text-right xl:text-left primary-color'>{pickupLocation}</span></h3>
 
-                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Expire</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-right xl:text-lef primary-color'>{expiredDateTime}</span></h3>
+                    <h3 className='montserrat flex justify-between'><b className='w-[80px]'>Expire</b> <b className='w-2 pr-5'>:</b> <span className='flex-1 text-right xl:text-left primary-color'>{expiredDateTime}</span></h3>
                 </div>
 
                 <div className='mt-10 xl:mt-0 space-y-5'>
