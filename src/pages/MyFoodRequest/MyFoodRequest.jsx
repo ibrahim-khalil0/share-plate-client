@@ -9,7 +9,7 @@ const MyFoodRequest = () => {
     const {user} = useContext(AuthContext)
 
     useEffect( () => {
-        fetch(`http://localhost:5000/requestedFoods?email=${user.email}`)
+        fetch(`https://share-plate-server-tau.vercel.app/requestedFoods?email=${user.email}`)
         .then(res => res.json())
         .then(data => setFoods(data))
     }, [])

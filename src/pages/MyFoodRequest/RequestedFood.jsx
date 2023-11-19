@@ -15,7 +15,7 @@ const RequestedFood = ({food, foods, setFoods}) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:5000/cancel/${id}`, {
+                fetch(`https://share-plate-server-tau.vercel.app/cancel/${id}`, {
                 method: 'DELETE'
                 })
                 .then(res => res.json())

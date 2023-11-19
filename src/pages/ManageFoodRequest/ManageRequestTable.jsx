@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,7 +42,7 @@ export default function ManageRequestTable({foods}) {
       const updateStatus = {manageStatus}
       console.log(updateStatus)
 
-      fetch(`http://localhost:5000/updateStatus/${id}`, {
+      fetch(`https://share-plate-server-tau.vercel.app/updateStatus/${id}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
@@ -50,7 +51,7 @@ export default function ManageRequestTable({foods}) {
         })
         .then(res => res.json())
         .then(data => {
-          alert("Product Updated Successfully")
+          toast("Food Status Updated Successfully")
 
         })
     }
@@ -96,6 +97,7 @@ export default function ManageRequestTable({foods}) {
                 </TableBody>
             </Table>
         </TableContainer>
+        <ToastContainer></ToastContainer>
     </div>
 
   );

@@ -78,7 +78,7 @@ const handleFoodUpdate = e => {
     const updateFood = {foodName, foodImage, foodQuantity, pickupLocation, expiredDateTime, status, additionalNote}
     console.log(foodId)
 
-    fetch(`http://localhost:5000/updateFood/${foodId}`, {
+    fetch(`https://share-plate-server-tau.vercel.app/updateFood/${foodId}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
@@ -106,7 +106,7 @@ const handleDelete = (id) => {
   })
   .then((willDelete) => {
     if (willDelete) {
-      fetch(`http://localhost:5000/delete/${id}`, {
+      fetch(`https://share-plate-server-tau.vercel.app/delete/${id}`, {
         method: 'DELETE'
     })
     .then(res => res.json())

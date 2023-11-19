@@ -34,7 +34,7 @@ const Details = () => {
         food.requestDate = requestDate
         console.log(food)
 
-        fetch(`http://localhost:5000/request`, {
+        fetch(`https://share-plate-server-tau.vercel.app/request`, {
             method: 'POST',
             headers: {
                 "content-type":"application/json",
@@ -69,7 +69,7 @@ const Details = () => {
                     </div>
                 </div>
                 <div>
-                    <img src={foodImage} alt="" className='w-full rounded-r-md' />
+                    <img src={foodImage} alt="" className='w-full rounded-r-md max-h-[450px]' />
                 </div>
 
                

@@ -12,7 +12,7 @@ const ManageFoods = () => {
     const [updateDependency, setUpdateDependency] = useState('foodName')
 
     useEffect( () => {
-        fetch(`http://localhost:5000/foods?email=${user.email}`)
+        fetch(`https://share-plate-server-tau.vercel.app/foods?email=${user.email}`)
         .then(res => res.json())
         .then(data => setFoods(data))
     }, [updateDependency])

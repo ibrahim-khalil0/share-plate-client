@@ -32,12 +32,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('https://share-plate-server-tau.vercel.app/foods')
       },
       {
         path: "/foods",
         element: <AvailableFoods></AvailableFoods>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('https://share-plate-server-tau.vercel.app/foods')
       },
       {
         path: "/addFood",
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       {
         path: "/food/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/food/${params.id}`)
+        loader: ({params}) => fetch(`https://share-plate-server-tau.vercel.app/food/${params.id}`)
       },
       {
         path: "/manageRequest/:id",

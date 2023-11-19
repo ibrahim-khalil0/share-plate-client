@@ -8,7 +8,7 @@ const ManageFoodRequest = () => {
     const [foods, setFoods] = useState([])
 
     useEffect( () => {
-        fetch(`http://localhost:5000/manageRequest?food=${id + 1}`)
+        fetch(`https://share-plate-server-tau.vercel.app/manageRequest?food=${id + 1}`)
         .then(res => res.json())
         .then(data => setFoods(data))
     }, [])

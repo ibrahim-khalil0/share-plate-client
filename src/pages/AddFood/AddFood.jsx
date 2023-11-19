@@ -28,7 +28,7 @@ const AddFood = () => {
         
 
 
-        fetch('http://localhost:5000/foods', {
+        fetch('https://share-plate-server-tau.vercel.app/foods', {
             method: 'POST',
             headers: {
                 "content-type":"application/json",
