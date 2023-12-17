@@ -1,4 +1,4 @@
-## Live Link : https://655996c8ddbcd06c4a21098a--grand-florentine-dd9831.netlify.app
+## Live Link : https://grand-florentine-dd9831.netlify.app/
 
 - It is a food sharing website. Here users will share their leftover food and another user can request to get that food.
 - To share the food user will get a food add form where they can add the food with all the details of the food.
